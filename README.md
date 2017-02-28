@@ -8,7 +8,7 @@
 ##add on
 ofxGui  
 ofxNetwork  
-ofxOsc
+ofxOsc  
 ofxXmlSettings  
 
 ##Contents
