@@ -60,6 +60,7 @@ VJ::VJ()
 
 , OscVj("127.0.0.1", 12349, 12348)
 , b_VjExist(true)
+, OscCg("127.0.0.1", 12358, 12357)
 {
 	/********************
 	********************/
@@ -97,6 +98,7 @@ void VJ::exit()
 	m.addIntArg(1);
 	
 	OscVj.OscSend.sendMessage(m);
+	OscCg.OscSend.sendMessage(m);
 }
 
 /******************************
@@ -144,6 +146,7 @@ void VJ::SetColorTheme(int ThemeId)
 		m.addIntArg(ThemeId);
 		
 		OscVj.OscSend.sendMessage(m);
+		OscCg.OscSend.sendMessage(m);
 	}
 }
 

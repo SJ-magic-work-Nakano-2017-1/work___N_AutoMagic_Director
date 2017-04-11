@@ -55,6 +55,7 @@ void ofApp::setup(){
 	ofSetVerticalSync(true);
 	ofSetFrameRate(30);
 	ofSetWindowShape(WIDTH, HEIGHT);
+	ofSetEscapeQuitsApp(false);
 	
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	// ofEnableSmoothing();
