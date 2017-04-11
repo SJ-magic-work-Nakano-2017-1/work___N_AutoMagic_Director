@@ -456,7 +456,7 @@ int AUTOMAGIC_CORE::MusicAnalysis(GRAPH& Graph)
 	/********************
 	********************/
 	long long ratio;
-	if( (VolLevel[DATA_VOL] <= VolLevel[DATA_VOL_LOW]) || (VolLevel[DATA_VOL] == 0) || ((VolLevel[DATA_VOL_LOW] == 0)) ){
+	if( (VolLevel[DATA_VOL] <= VolLevel[DATA_VOL_LOW]) || (VolLevel[DATA_VOL] < THRESH_TO_NOSOUND) || (VolLevel[DATA_VOL_LOW] < THRESH_TO_NOSOUND) ){
 		ratio = 0;
 	}else{
 		ratio = VolLevel[DATA_VOL_LOW] * 100 / VolLevel[DATA_VOL];
@@ -488,7 +488,7 @@ int AUTOMAGIC_CORE::MusicAnalysis(GRAPH& Graph)
 			if(TIMEOUT_MS <= t_NoSound_NoBeat){
 				State = STATE_SOUND_DROP;
 				StateChart_Transition(SOUND_TO_SOUNDDROP, &c_Beats_in_Flywheel, &t_NoSound_NoBeat);
-			}else if(THRESH_ENOUGH_BEAT < ratio){
+			}else if(THRESH_ENOUGH_BEAT < ratio){ // enough volume and enough ratio.
 				State = STATE_BEAT_IN;
 				StateChart_Transition(SOUND_TO_BEATIN, &c_Beats_in_Flywheel, &t_NoSound_NoBeat);
 			}else if(light->Is_StayTooLong_PatternChange(State)){
@@ -510,14 +510,14 @@ int AUTOMAGIC_CORE::MusicAnalysis(GRAPH& Graph)
 		}
 		case STATE_BEAT_IN:
 		{
-			if(THRESH_ENOUGH_BEAT < ratio){
+			if(THRESH_ENOUGH_BEAT < ratio){ // enough volume and enough ratio.
 				t_NoSound_NoBeat = 0;
 			}
 			
 			if(TIMEOUT_MS <= t_NoSound_NoBeat){
 				State = STATE_BEAT_IN_DROP;
 				StateChart_Transition(BEATIN_TO_BEATINDROP, &c_Beats_in_Flywheel, &t_NoSound_NoBeat);
-			}else{
+			}else if(t_NoSound_NoBeat == 0){ // Beat check‚·‚é‚½‚ß‚ÌðŒ‚ð–ž‚½‚µ‚Ä‚¢‚é(ã‚Å‚ÌcheckŒ‹‰Ê‚ª"t_NoSound_NoBeat"‚É”½‰f‚³‚ê‚Ä‚¢‚é)
 				/********************
 				enum{
 					RET_NONE,
@@ -558,7 +558,7 @@ int AUTOMAGIC_CORE::MusicAnalysis(GRAPH& Graph)
 		}
 		case STATE_BEAT_IN_DROP:
 		{
-			if(THRESH_ENOUGH_BEAT < ratio){
+			if(THRESH_ENOUGH_BEAT < ratio){ // enough volume and enough ratio.
 				State = STATE_BEAT_IN;
 				StateChart_Transition(BEATINDROP_TO_BEATIN, &c_Beats_in_Flywheel, &t_NoSound_NoBeat);
 			}else if(light->Is_SelfPropultion_Finish()){

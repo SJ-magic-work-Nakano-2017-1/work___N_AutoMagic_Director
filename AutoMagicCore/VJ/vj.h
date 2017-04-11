@@ -117,6 +117,7 @@ private:
 	bool b_VjExist;
 	
 	OSC_TARGET OscVj;
+	OSC_TARGET OscCg;
 	
 	enum { UDP_SEND_PORT = 12350, };
 	ofxUDPManager udpConnection;
