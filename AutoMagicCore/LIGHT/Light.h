@@ -138,7 +138,7 @@ public:
 	
 	void setup();
 	void update();
-	void draw();
+	void draw(bool b_SoundOn);
 	void exit();
 
 	void close_all_LogFile();

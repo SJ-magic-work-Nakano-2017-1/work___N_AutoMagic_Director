@@ -170,7 +170,7 @@ public:
 	
 	void setup();
 	void update();
-	void draw(double Vol_SoundSync);
+	void draw(bool b_SoundOn, double Vol_SoundSync);
 	void exit();
 	
 	void StateChart_Transition(TRANSITION Transition);

@@ -1647,7 +1647,7 @@ void LIGHT::CalColor(struct COLOR LedColor, int Lev, struct COLOR *outColor)
 
 /******************************
 ******************************/
-void LIGHT::draw()
+void LIGHT::draw(bool b_SoundOn)
 {
 	/********************
 	LedOutputColorを一気に出力.
@@ -1670,12 +1670,21 @@ void LIGHT::draw()
 			Last_LedAngle[i] = DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Angle;
 			
 			/* UDP */
-			message +=	ofToString(int(DeviceOutputCh[i].Lum.R))							+ "," + 
-						ofToString(int(DeviceOutputCh[i].Lum.G))							+ "," +
-						ofToString(int(DeviceOutputCh[i].Lum.B))							+ "," +
-						ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Lum.R))		+ "," + // W
-						ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Angle.Pan))	+ "," +
-						ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Angle.Tilt))	+ "|";
+			if(b_SoundOn){
+				message +=	ofToString(int(DeviceOutputCh[i].Lum.R))							+ "," + 
+							ofToString(int(DeviceOutputCh[i].Lum.G))							+ "," +
+							ofToString(int(DeviceOutputCh[i].Lum.B))							+ "," +
+							ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Lum.R))		+ "," + // W
+							ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Angle.Pan))	+ "," +
+							ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Angle.Tilt))	+ "|";
+			}else{
+				message +=	ofToString(0)														+ "," + 
+							ofToString(0)														+ "," +
+							ofToString(0)														+ "," +
+							ofToString(0)														+ "," + // W
+							ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Angle.Pan))	+ "," +
+							ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Angle.Tilt))	+ "|";
+			}
 						
 		}else if(DeviceOutputCh[i].Angle.Pan != -1){
 			/* Log */
@@ -1686,12 +1695,21 @@ void LIGHT::draw()
 			Last_LedAngle[i] = DeviceOutputCh[i].Angle;
 			
 			/* UDP */
-			message +=	ofToString(int(DeviceOutputCh[i].Lum.R))							+ "," + 
-						ofToString(int(DeviceOutputCh[i].Lum.G))							+ "," +
-						ofToString(int(DeviceOutputCh[i].Lum.B))							+ "," +
-						ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Lum.R))		+ "," + // W
-						ofToString(int(DeviceOutputCh[i].Angle.Pan))						+ "," +
-						ofToString(int(DeviceOutputCh[i].Angle.Tilt))						+ "|";
+			if(b_SoundOn){
+				message +=	ofToString(int(DeviceOutputCh[i].Lum.R))							+ "," + 
+							ofToString(int(DeviceOutputCh[i].Lum.G))							+ "," +
+							ofToString(int(DeviceOutputCh[i].Lum.B))							+ "," +
+							ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Lum.R))		+ "," + // W
+							ofToString(int(DeviceOutputCh[i].Angle.Pan))						+ "," +
+							ofToString(int(DeviceOutputCh[i].Angle.Tilt))						+ "|";
+			}else{
+				message +=	ofToString(0)														+ "," + 
+							ofToString(0)														+ "," +
+							ofToString(0)														+ "," +
+							ofToString(0)														+ "," + // W
+							ofToString(int(DeviceOutputCh[i].Angle.Pan))						+ "," +
+							ofToString(int(DeviceOutputCh[i].Angle.Tilt))						+ "|";
+			}
 						
 		}else{
 			/* Log */
@@ -1699,12 +1717,21 @@ void LIGHT::draw()
 						i, DeviceOutputCh[i].Lum.R, DeviceOutputCh[i].Lum.G, DeviceOutputCh[i].Lum.B, DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Lum.R, Last_LedAngle[i].Pan, Last_LedAngle[i].Tilt);
 						
 			/* UDP */
-			message +=	ofToString(int(DeviceOutputCh[i].Lum.R))							+ "," + 
-						ofToString(int(DeviceOutputCh[i].Lum.G))							+ "," +
-						ofToString(int(DeviceOutputCh[i].Lum.B))							+ "," +
-						ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Lum.R))		+ "," + // W
-						ofToString(int(Last_LedAngle[i].Pan))								+ "," +
-						ofToString(int(Last_LedAngle[i].Tilt))								+ "|";
+			if(b_SoundOn){
+				message +=	ofToString(int(DeviceOutputCh[i].Lum.R))							+ "," + 
+							ofToString(int(DeviceOutputCh[i].Lum.G))							+ "," +
+							ofToString(int(DeviceOutputCh[i].Lum.B))							+ "," +
+							ofToString(int(DeviceOutputCh[i + NUM_PHYSICAL_LEDS/2].Lum.R))		+ "," + // W
+							ofToString(int(Last_LedAngle[i].Pan))								+ "," +
+							ofToString(int(Last_LedAngle[i].Tilt))								+ "|";
+			}else{
+				message +=	ofToString(0)														+ "," + 
+							ofToString(0)														+ "," +
+							ofToString(0)														+ "," +
+							ofToString(0)														+ "," + // W
+							ofToString(int(Last_LedAngle[i].Pan))								+ "," +
+							ofToString(int(Last_LedAngle[i].Tilt))								+ "|";
+			}
 		}
 		
 		fprintf_Dmx(fp_script, "%s", buf);
