@@ -137,7 +137,7 @@ namespace SPACE_LIGHT{
 
 struct PHYSICAL_CH_SET{
 	enum{
-		MAX_CHS_IN_1LOGICAL_CH = 100,
+		MAX_CHS_IN_1LOGICAL_CH = 150,
 	};
 	int PhysicalCh[MAX_CHS_IN_1LOGICAL_CH];
 };
@@ -328,6 +328,29 @@ static int Weight_PlayMode_Fix_Strobe[NUM_STATES][NUM_BOOSTMODE][NUM_PLAYMODES] 
 	},
 };
 
+static int Weight_PlayMode_WallWasher[NUM_STATES][NUM_BOOSTMODE][NUM_PLAYMODES] = {
+	{ // STATE_NOSOUND, 
+		// Normal{Beat, Self}, Boost{Beat, Self}
+		{0, 1}, {0, 1},
+	},
+	{ // STATE_SOUND, 
+		{0, 1}, {0, 1},
+	},
+	{ // STATE_SOUND_DROP, 
+	},
+	{ // STATE_BEAT_IN, 
+		{0, 1}, {0, 1},
+	},
+	{ // STATE_BEAT_IN_DROP, 
+	},
+	{ // STATE_FLYWHEEL, 
+		{0, 1}, {0, 1},
+	},
+	{ // STATE_FLYWHEEL_DROP, 
+	},
+};
+
+
 /************************************************************
 ÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅöÅö
 Copy from Excel below.
@@ -335,9 +358,34 @@ Copy from Excel below.
 ************************************************************/
 BLOCK_GROUP BlockGrouping_InTangible[] = {						
 	{					
-		"GP0__NOSOUND_NORMAL__SEPARATE__SYMMETRY",				
+		"GP0__NOSOUND",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
+				{ // LogicalCh:Physical ch set		
+					{0, 44, 5, 49, -1},	// CH0
+					{1, 45, 6, 50, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 8, 52, -1},	// CH3
+					{4, 48, 9, 53, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -348,7 +396,32 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -362,13 +435,113 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{11, 23, -1},	// CH0
-					{12, 22, -1},	// CH1
-					{13, 21, -1},	// CH2
-					{14, 20, -1},	// CH3
-					{15, 19, -1},	// CH4
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -387,32 +560,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{16, 26, -1},	// CH0
-					{17, 25, -1},	// CH1
-					{18, 24, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -426,7 +574,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -437,7 +585,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	ball 2		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -448,12 +596,12 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -462,7 +610,32 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -487,7 +660,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -501,7 +674,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -512,7 +685,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -526,7 +699,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -565,20 +738,70 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 		},				
 	},					
 	{					
-		"GP0__SOUND_NORMAL__SEPARATE__DIRECTION",				
+		"GP0__SOUND_NORMAL__SYNC__STRAIGHT",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, -1},	// CH0
-					{8, -1},	// CH1
-					{9, -1},	// CH2
-					{10, -1},	// CH3
+					{0, 44, 5, 49, -1},	// CH0
+					{1, 45, 6, 50, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 8, 52, -1},	// CH3
+					{4, 48, 9, 53, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -592,13 +815,113 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{11, 19, -1},	// CH0
-					{12, 20, -1},	// CH1
-					{13, 21, -1},	// CH2
-					{14, 22, -1},	// CH3
-					{15, 23, -1},	// CH4
+					{16, 60, 23, 67, 30, 74, 37, 81, -1},	// CH0
+					{17, 61, 24, 68, 31, 75, 38, 82, -1},	// CH1
+					{18, 62, 25, 69, 32, 76, 39, 83, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 27, 71, 34, 78, 41, 85, -1},	// CH4
+					{21, 65, 28, 72, 35, 79, 42, 86, -1},	// CH5
+					{22, 66, 29, 73, 36, 80, 43, 87, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, 93, 98, -1},	// CH0
+					{89, 94, 99, -1},	// CH1
+					{90, 95, 100, -1},	// CH2
+					{91, 96, 101, -1},	// CH3
+					{92, 97, 102, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -617,57 +940,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{16, 24, -1},	// CH0
-					{17, 25, -1},	// CH1
-					{18, 26, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{27, 30, -1},	// CH0
-					{28, 31, -1},	// CH1
-					{29, 32, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -678,12 +951,12 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -692,7 +965,57 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -717,7 +1040,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -731,7 +1054,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -742,7 +1065,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -756,7 +1079,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -795,20 +1118,70 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 		},				
 	},					
 	{					
-		"GP0__SOUND_NORMAL__SEPARATE__SYMMETRY",				
+		"GP0__SOUND_NORMAL__SYNC__TWIST",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, -1},	// CH0
-					{8, -1},	// CH1
-					{9, -1},	// CH2
-					{10, -1},	// CH3
+					{0, 44, 9, 53, -1},	// CH0
+					{1, 45, 8, 52, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 6, 50, -1},	// CH3
+					{4, 48, 5, 49, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -822,13 +1195,113 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{11, 23, -1},	// CH0
-					{12, 22, -1},	// CH1
-					{13, 21, -1},	// CH2
-					{14, 20, -1},	// CH3
-					{15, 19, -1},	// CH4
+					{16, 60, 29, 73, 30, 74, 43, 87, -1},	// CH0
+					{17, 61, 28, 72, 31, 75, 42, 86, -1},	// CH1
+					{18, 62, 27, 71, 32, 76, 41, 85, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 25, 69, 34, 78, 39, 83, -1},	// CH4
+					{21, 65, 24, 68, 35, 79, 38, 82, -1},	// CH5
+					{22, 66, 23, 67, 36, 80, 37, 81, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, 97, 98, -1},	// CH0
+					{89, 96, 99, -1},	// CH1
+					{90, 95, 100, -1},	// CH2
+					{91, 94, 101, -1},	// CH3
+					{92, 93, 102, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -847,57 +1320,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{16, 26, -1},	// CH0
-					{17, 25, -1},	// CH1
-					{18, 24, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{27, 32, -1},	// CH0
-					{28, 31, -1},	// CH1
-					{29, 30, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -908,12 +1331,12 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -922,7 +1345,57 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -947,7 +1420,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -961,7 +1434,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -972,7 +1445,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -986,7 +1459,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -1027,18 +1500,68 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 	{					
 		"GP0__SOUND_BOOST__SEPARATE__DIRECTION",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
+					{0, 44, -1},	// CH0
+					{1, 45, -1},	// CH1
+					{2, 46, -1},	// CH2
+					{3, 47, -1},	// CH3
+					{4, 48, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+					{5, 49, -1},	// CH0
+					{6, 50, -1},	// CH1
+					{7, 51, -1},	// CH2
+					{8, 52, -1},	// CH3
+					{9, 53, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -1052,7 +1575,107 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
+				{ // LogicalCh:Physical ch set		
+					{16, 60, -1},	// CH0
+					{17, 61, -1},	// CH1
+					{18, 62, -1},	// CH2
+					{19, 63, -1},	// CH3
+					{20, 64, -1},	// CH4
+					{21, 65, -1},	// CH5
+					{22, 66, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+					{23, 67, -1},	// CH0
+					{24, 68, -1},	// CH1
+					{25, 69, -1},	// CH2
+					{26, 70, -1},	// CH3
+					{27, 71, -1},	// CH4
+					{28, 72, -1},	// CH5
+					{29, 73, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+					{30, 74, -1},	// CH0
+					{31, 75, -1},	// CH1
+					{32, 76, -1},	// CH2
+					{33, 77, -1},	// CH3
+					{34, 78, -1},	// CH4
+					{35, 79, -1},	// CH5
+					{36, 80, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+					{37, 81, -1},	// CH0
+					{38, 82, -1},	// CH1
+					{39, 83, -1},	// CH2
+					{40, 84, -1},	// CH3
+					{41, 85, -1},	// CH4
+					{42, 86, -1},	// CH5
+					{43, 87, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1077,7 +1700,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1091,7 +1714,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -1102,7 +1725,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1116,7 +1739,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -1127,23 +1750,23 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	ball 3		
 				{ // LogicalCh:Physical ch set		
-					{40, -1},	// CH0
-					{41, -1},	// CH1
-					{42, -1},	// CH2
-					{43, -1},	// CH3
+						// CH0
+						// CH1
+						// CH2
+						// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
+				Bp_1,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -1152,13 +1775,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
-					{44, 52, -1},	// CH0
-					{45, 53, -1},	// CH1
-					{46, 54, -1},	// CH2
-					{47, 55, -1},	// CH3
-					{48, 56, -1},	// CH4
+					{192, -1},	// CH0
+					{193, -1},	// CH1
+					{194, -1},	// CH2
+					{195, -1},	// CH3
+					{196, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -1177,13 +1800,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
-					{49, 57, -1},	// CH0
-					{50, 58, -1},	// CH1
-					{51, 59, -1},	// CH2
-						// CH3
-						// CH4
+					{197, -1},	// CH0
+					{198, -1},	// CH1
+					{199, -1},	// CH2
+					{200, -1},	// CH3
+					{201, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -1191,7 +1814,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -1202,13 +1825,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2 strobe		
 				{ // LogicalCh:Physical ch set		
-					{60, 63, -1},	// CH0
-					{61, 64, -1},	// CH1
-					{62, 65, -1},	// CH2
-						// CH3
-						// CH4
+					{202, -1},	// CH0
+					{203, -1},	// CH1
+					{204, -1},	// CH2
+					{205, -1},	// CH3
+					{206, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -1216,7 +1839,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -1257,18 +1880,68 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 	{					
 		"GP0__SOUND_BOOST__SEPARATE__SYMMETRY",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
+					{0, 48, -1},	// CH0
+					{1, 47, -1},	// CH1
+					{2, 46, -1},	// CH2
+					{3, 45, -1},	// CH3
+					{4, 44, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+					{5, 53, -1},	// CH0
+					{6, 52, -1},	// CH1
+					{7, 51, -1},	// CH2
+					{8, 50, -1},	// CH3
+					{9, 49, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 58, -1},	// CH0
+					{12, 57, -1},	// CH1
+					{13, 56, -1},	// CH2
+					{14, 55, -1},	// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -1282,7 +1955,107 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
+				{ // LogicalCh:Physical ch set		
+					{16, 66, -1},	// CH0
+					{17, 65, -1},	// CH1
+					{18, 64, -1},	// CH2
+					{19, 63, -1},	// CH3
+					{20, 62, -1},	// CH4
+					{21, 61, -1},	// CH5
+					{22, 60, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+					{23, 73, -1},	// CH0
+					{24, 72, -1},	// CH1
+					{25, 71, -1},	// CH2
+					{26, 70, -1},	// CH3
+					{27, 69, -1},	// CH4
+					{28, 68, -1},	// CH5
+					{29, 67, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+					{30, 80, -1},	// CH0
+					{31, 79, -1},	// CH1
+					{32, 78, -1},	// CH2
+					{33, 77, -1},	// CH3
+					{34, 76, -1},	// CH4
+					{35, 75, -1},	// CH5
+					{36, 74, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+					{37, 87, -1},	// CH0
+					{38, 86, -1},	// CH1
+					{39, 85, -1},	// CH2
+					{40, 84, -1},	// CH3
+					{41, 83, -1},	// CH4
+					{42, 82, -1},	// CH5
+					{43, 81, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1307,7 +2080,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1321,7 +2094,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -1332,7 +2105,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1346,7 +2119,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -1357,23 +2130,23 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	ball 3		
 				{ // LogicalCh:Physical ch set		
-					{40, -1},	// CH0
-					{41, -1},	// CH1
-					{42, -1},	// CH2
-					{43, -1},	// CH3
+						// CH0
+						// CH1
+						// CH2
+						// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
+				Bp_1,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -1382,13 +2155,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
-					{44, 56, -1},	// CH0
-					{45, 55, -1},	// CH1
-					{46, 54, -1},	// CH2
-					{47, 53, -1},	// CH3
-					{48, 52, -1},	// CH4
+					{192, -1},	// CH0
+					{193, -1},	// CH1
+					{194, -1},	// CH2
+					{195, -1},	// CH3
+					{196, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -1407,13 +2180,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
-					{49, 59, -1},	// CH0
-					{50, 58, -1},	// CH1
-					{51, 57, -1},	// CH2
-						// CH3
-						// CH4
+					{197, -1},	// CH0
+					{198, -1},	// CH1
+					{199, -1},	// CH2
+					{200, -1},	// CH3
+					{201, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -1421,7 +2194,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -1432,13 +2205,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2 strobe		
 				{ // LogicalCh:Physical ch set		
-					{60, 65, -1},	// CH0
-					{61, 64, -1},	// CH1
-					{62, 63, -1},	// CH2
-						// CH3
-						// CH4
+					{202, -1},	// CH0
+					{203, -1},	// CH1
+					{204, -1},	// CH2
+					{205, -1},	// CH3
+					{206, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -1446,7 +2219,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -1485,20 +2258,70 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 		},				
 	},					
 	{					
-		"GP0__BEAT_NORMAL__SEPARATE__DIRECTION",				
+		"GP0__BEAT_NORMAL__SYNC__STRAIGHT",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, -1},	// CH0
-					{8, -1},	// CH1
-					{9, -1},	// CH2
-					{10, -1},	// CH3
+					{0, 44, 5, 49, -1},	// CH0
+					{1, 45, 6, 50, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 8, 52, -1},	// CH3
+					{4, 48, 9, 53, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -1512,13 +2335,138 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{11, 19, -1},	// CH0
-					{12, 20, -1},	// CH1
-					{13, 21, -1},	// CH2
-					{14, 22, -1},	// CH3
-					{15, 23, -1},	// CH4
+					{16, 60, 23, 67, 30, 74, 37, 81, -1},	// CH0
+					{17, 61, 24, 68, 31, 75, 38, 82, -1},	// CH1
+					{18, 62, 25, 69, 32, 76, 39, 83, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 27, 71, 34, 78, 41, 85, -1},	// CH4
+					{21, 65, 28, 72, 35, 79, 42, 86, -1},	// CH5
+					{22, 66, 29, 73, 36, 80, 43, 87, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -1537,7 +2485,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 2		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1551,7 +2499,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -1562,32 +2510,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{27, 30, -1},	// CH0
-					{28, 31, -1},	// CH1
-					{29, 32, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	ball 3		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1598,12 +2521,12 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
+				Bp_1,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -1612,7 +2535,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1637,32 +2560,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{49, 57, -1},	// CH0
-					{50, 58, -1},	// CH1
-					{51, 59, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1676,7 +2574,32 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -1715,20 +2638,70 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 		},				
 	},					
 	{					
-		"GP0__BEAT_NORMAL__SEPARATE__SYMMETRY",				
+		"GP0__BEAT_NORMAL__SYNC__TWIST",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, -1},	// CH0
-					{8, -1},	// CH1
-					{9, -1},	// CH2
-					{10, -1},	// CH3
+					{0, 44, 9, 53, -1},	// CH0
+					{1, 45, 8, 52, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 6, 50, -1},	// CH3
+					{4, 48, 5, 49, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -1742,13 +2715,138 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{11, 23, -1},	// CH0
-					{12, 22, -1},	// CH1
-					{13, 21, -1},	// CH2
-					{14, 20, -1},	// CH3
-					{15, 19, -1},	// CH4
+					{16, 60, 29, 73, 30, 74, 43, 87, -1},	// CH0
+					{17, 61, 28, 72, 31, 75, 42, 86, -1},	// CH1
+					{18, 62, 27, 71, 32, 76, 41, 85, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 25, 69, 34, 78, 39, 83, -1},	// CH4
+					{21, 65, 24, 68, 35, 79, 38, 82, -1},	// CH5
+					{22, 66, 23, 67, 36, 80, 37, 81, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -1767,7 +2865,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 2		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1781,7 +2879,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -1792,32 +2890,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{27, 32, -1},	// CH0
-					{28, 31, -1},	// CH1
-					{29, 30, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	ball 3		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1828,12 +2901,12 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
+				Bp_1,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -1842,7 +2915,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1867,32 +2940,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{49, 59, -1},	// CH0
-					{50, 58, -1},	// CH1
-					{51, 57, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -1906,7 +2954,792 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // END			
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				NULL,		
+				NULL,		
+				false,	// b_PanTilt	
+				NULL,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__MOV_LUM_RGB,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+		},				
+	},					
+	{					
+		"GP0__BEAT_BOOST__SYNC__STRAIGHT",				
+		{				
+			{ // Block	wall 0 RGB		
+				{ // LogicalCh:Physical ch set		
+					{0, 44, 5, 49, -1},	// CH0
+					{1, 45, 6, 50, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 8, 52, -1},	// CH3
+					{4, 48, 9, 53, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_4,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 2		
+				{ // LogicalCh:Physical ch set		
+					{16, 60, 23, 67, 30, 74, 37, 81, -1},	// CH0
+					{17, 61, 24, 68, 31, 75, 38, 82, -1},	// CH1
+					{18, 62, 25, 69, 32, 76, 39, 83, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 27, 71, 34, 78, 41, 85, -1},	// CH4
+					{21, 65, 28, 72, 35, 79, 42, 86, -1},	// CH5
+					{22, 66, 29, 73, 36, 80, 43, 87, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, 93, 98, -1},	// CH0
+					{89, 94, 99, -1},	// CH1
+					{90, 95, 100, -1},	// CH2
+					{91, 96, 101, -1},	// CH3
+					{92, 97, 102, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // END			
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				NULL,		
+				NULL,		
+				false,	// b_PanTilt	
+				NULL,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__MOV_LUM_RGB,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+		},				
+	},					
+	{					
+		"GP0__BEAT_BOOST__SYNC__TWIST",				
+		{				
+			{ // Block	wall 0 RGB		
+				{ // LogicalCh:Physical ch set		
+					{0, 44, 9, 53, -1},	// CH0
+					{1, 45, 8, 52, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 6, 50, -1},	// CH3
+					{4, 48, 5, 49, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_4,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 2		
+				{ // LogicalCh:Physical ch set		
+					{16, 60, 29, 73, 30, 74, 43, 87, -1},	// CH0
+					{17, 61, 28, 72, 31, 75, 42, 86, -1},	// CH1
+					{18, 62, 27, 71, 32, 76, 41, 85, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 25, 69, 34, 78, 39, 83, -1},	// CH4
+					{21, 65, 24, 68, 35, 79, 38, 82, -1},	// CH5
+					{22, 66, 23, 67, 36, 80, 37, 81, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, 97, 98, -1},	// CH0
+					{89, 96, 99, -1},	// CH1
+					{90, 95, 100, -1},	// CH2
+					{91, 94, 101, -1},	// CH3
+					{92, 93, 102, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -1947,43 +3780,18 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 	{					
 		"GP0__BEAT_BOOST__SEPARATE__DIRECTION",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, -1},	// CH0
-					{8, -1},	// CH1
-					{9, -1},	// CH2
-					{10, -1},	// CH3
-						// CH4
+					{0, 44, -1},	// CH0
+					{1, 45, -1},	// CH1
+					{2, 46, -1},	// CH2
+					{3, 47, -1},	// CH3
+					{4, 48, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_5,	// Bp_Pattern	
@@ -1997,21 +3805,21 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	wall 1 RGB		
 				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
+					{5, 49, -1},	// CH0
+					{6, 50, -1},	// CH1
+					{7, 51, -1},	// CH2
+					{8, 52, -1},	// CH3
+					{9, 53, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -2022,48 +3830,23 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	wall center		
 				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Box Fix RGB 4ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -2072,13 +3855,113 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{44, 52, -1},	// CH0
-					{45, 53, -1},	// CH1
-					{46, 54, -1},	// CH2
-					{47, 55, -1},	// CH3
-					{48, 56, -1},	// CH4
+					{16, 60, -1},	// CH0
+					{17, 61, -1},	// CH1
+					{18, 62, -1},	// CH2
+					{19, 63, -1},	// CH3
+					{20, 64, -1},	// CH4
+					{21, 65, -1},	// CH5
+					{22, 66, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+					{23, 67, -1},	// CH0
+					{24, 68, -1},	// CH1
+					{25, 69, -1},	// CH2
+					{26, 70, -1},	// CH3
+					{27, 71, -1},	// CH4
+					{28, 72, -1},	// CH5
+					{29, 73, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+					{30, 74, -1},	// CH0
+					{31, 75, -1},	// CH1
+					{32, 76, -1},	// CH2
+					{33, 77, -1},	// CH3
+					{34, 78, -1},	// CH4
+					{35, 79, -1},	// CH5
+					{36, 80, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+					{37, 81, -1},	// CH0
+					{38, 82, -1},	// CH1
+					{39, 83, -1},	// CH2
+					{40, 84, -1},	// CH3
+					{41, 85, -1},	// CH4
+					{42, 86, -1},	// CH5
+					{43, 87, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, -1},	// CH0
+					{89, -1},	// CH1
+					{90, -1},	// CH2
+					{91, -1},	// CH3
+					{92, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -2097,13 +3980,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
-					{49, 57, -1},	// CH0
-					{50, 58, -1},	// CH1
-					{51, 59, -1},	// CH2
-						// CH3
-						// CH4
+					{93, -1},	// CH0
+					{94, -1},	// CH1
+					{95, -1},	// CH2
+					{96, -1},	// CH3
+					{97, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -2111,7 +3994,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -2122,11 +4005,61 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2		
 				{ // LogicalCh:Physical ch set		
-					{60, 63, -1},	// CH0
-					{61, 64, -1},	// CH1
-					{62, 65, -1},	// CH2
+					{98, -1},	// CH0
+					{99, -1},	// CH1
+					{100, -1},	// CH2
+					{101, -1},	// CH3
+					{102, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
 						// CH3
 						// CH4
 						// CH5
@@ -2136,7 +4069,57 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -2177,43 +4160,18 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 	{					
 		"GP0__BEAT_BOOST__SEPARATE__SYMMETRY",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, -1},	// CH0
-					{8, -1},	// CH1
-					{9, -1},	// CH2
-					{10, -1},	// CH3
-						// CH4
+					{0, 48, -1},	// CH0
+					{1, 47, -1},	// CH1
+					{2, 46, -1},	// CH2
+					{3, 45, -1},	// CH3
+					{4, 44, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_5,	// Bp_Pattern	
@@ -2227,21 +4185,21 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	wall 1 RGB		
 				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
+					{5, 53, -1},	// CH0
+					{6, 52, -1},	// CH1
+					{7, 51, -1},	// CH2
+					{8, 50, -1},	// CH3
+					{9, 49, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -2252,48 +4210,23 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	wall center		
 				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
+					{11, 58, -1},	// CH0
+					{12, 57, -1},	// CH1
+					{13, 56, -1},	// CH2
+					{14, 55, -1},	// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Box Fix RGB 4ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -2302,13 +4235,113 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{44, 56, -1},	// CH0
-					{45, 55, -1},	// CH1
-					{46, 54, -1},	// CH2
-					{47, 53, -1},	// CH3
-					{48, 52, -1},	// CH4
+					{16, 66, -1},	// CH0
+					{17, 65, -1},	// CH1
+					{18, 64, -1},	// CH2
+					{19, 63, -1},	// CH3
+					{20, 62, -1},	// CH4
+					{21, 61, -1},	// CH5
+					{22, 60, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+					{23, 73, -1},	// CH0
+					{24, 72, -1},	// CH1
+					{25, 71, -1},	// CH2
+					{26, 70, -1},	// CH3
+					{27, 69, -1},	// CH4
+					{28, 68, -1},	// CH5
+					{29, 67, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+					{30, 80, -1},	// CH0
+					{31, 79, -1},	// CH1
+					{32, 78, -1},	// CH2
+					{33, 77, -1},	// CH3
+					{34, 76, -1},	// CH4
+					{35, 75, -1},	// CH5
+					{36, 74, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+					{37, 87, -1},	// CH0
+					{38, 86, -1},	// CH1
+					{39, 85, -1},	// CH2
+					{40, 84, -1},	// CH3
+					{41, 83, -1},	// CH4
+					{42, 82, -1},	// CH5
+					{43, 81, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, -1},	// CH0
+					{89, -1},	// CH1
+					{90, -1},	// CH2
+					{91, -1},	// CH3
+					{92, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -2327,13 +4360,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
-					{49, 59, -1},	// CH0
-					{50, 58, -1},	// CH1
-					{51, 57, -1},	// CH2
-						// CH3
-						// CH4
+					{93, -1},	// CH0
+					{94, -1},	// CH1
+					{95, -1},	// CH2
+					{96, -1},	// CH3
+					{97, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -2341,7 +4374,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -2352,11 +4385,61 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2		
 				{ // LogicalCh:Physical ch set		
-					{60, 65, -1},	// CH0
-					{61, 64, -1},	// CH1
-					{62, 63, -1},	// CH2
+					{98, -1},	// CH0
+					{99, -1},	// CH1
+					{100, -1},	// CH2
+					{101, -1},	// CH3
+					{102, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
 						// CH3
 						// CH4
 						// CH5
@@ -2366,7 +4449,57 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -2405,20 +4538,70 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 		},				
 	},					
 	{					
-		"GP0__FLYWHEEL_NORMAL__SEPARATE__DIRECTION",				
+		"GP0__FLYWHEEL_NORMAL__SYNC__STRAIGHT",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, -1},	// CH0
-					{8, -1},	// CH1
-					{9, -1},	// CH2
-					{10, -1},	// CH3
+					{0, 44, 5, 49, -1},	// CH0
+					{1, 45, 6, 50, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 8, 52, -1},	// CH3
+					{4, 48, 9, 53, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -2432,13 +4615,113 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{11, 19, -1},	// CH0
-					{12, 20, -1},	// CH1
-					{13, 21, -1},	// CH2
-					{14, 22, -1},	// CH3
-					{15, 23, -1},	// CH4
+					{16, 60, 23, 67, 30, 74, 37, 81, -1},	// CH0
+					{17, 61, 24, 68, 31, 75, 38, 82, -1},	// CH1
+					{18, 62, 25, 69, 32, 76, 39, 83, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 27, 71, 34, 78, 41, 85, -1},	// CH4
+					{21, 65, 28, 72, 35, 79, 42, 86, -1},	// CH5
+					{22, 66, 29, 73, 36, 80, 43, 87, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, 93, 98, -1},	// CH0
+					{89, 94, 99, -1},	// CH1
+					{90, 95, 100, -1},	// CH2
+					{91, 96, 101, -1},	// CH3
+					{92, 97, 102, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -2457,88 +4740,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{16, 24, -1},	// CH0
-					{17, 25, -1},	// CH1
-					{18, 26, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{27, 30, -1},	// CH0
-					{28, 31, -1},	// CH1
-					{29, 32, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
 						// CH2
 						// CH3
 						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
-				{ // LogicalCh:Physical ch set		
-					{44, 52, -1},	// CH0
-					{45, 53, -1},	// CH1
-					{46, 54, -1},	// CH2
-					{47, 55, -1},	// CH3
-					{48, 56, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -2557,7 +4765,57 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -2571,7 +4829,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -2582,7 +4840,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -2596,7 +4854,32 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -2635,20 +4918,70 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 		},				
 	},					
 	{					
-		"GP0__FLYWHEEL_NORMAL__SEPARATE__SYMMETRY",				
+		"GP0__FLYWHEEL_NORMAL__SYNC__TWIST",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, -1},	// CH0
-					{8, -1},	// CH1
-					{9, -1},	// CH2
-					{10, -1},	// CH3
+					{0, 44, 9, 53, -1},	// CH0
+					{1, 45, 8, 52, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 6, 50, -1},	// CH3
+					{4, 48, 5, 49, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -2662,13 +4995,113 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{11, 23, -1},	// CH0
-					{12, 22, -1},	// CH1
-					{13, 21, -1},	// CH2
-					{14, 20, -1},	// CH3
-					{15, 19, -1},	// CH4
+					{16, 60, 29, 73, 30, 74, 43, 87, -1},	// CH0
+					{17, 61, 28, 72, 31, 75, 42, 86, -1},	// CH1
+					{18, 62, 27, 71, 32, 76, 41, 85, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 25, 69, 34, 78, 39, 83, -1},	// CH4
+					{21, 65, 24, 68, 35, 79, 38, 82, -1},	// CH5
+					{22, 66, 23, 67, 36, 80, 37, 81, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, 97, 98, -1},	// CH0
+					{89, 96, 99, -1},	// CH1
+					{90, 95, 100, -1},	// CH2
+					{91, 94, 101, -1},	// CH3
+					{92, 93, 102, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -2687,88 +5120,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{16, 26, -1},	// CH0
-					{17, 25, -1},	// CH1
-					{18, 24, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
-				{ // LogicalCh:Physical ch set		
-					{27, 32, -1},	// CH0
-					{28, 31, -1},	// CH1
-					{29, 30, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
 						// CH2
 						// CH3
 						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
-				{ // LogicalCh:Physical ch set		
-					{44, 56, -1},	// CH0
-					{45, 55, -1},	// CH1
-					{46, 54, -1},	// CH2
-					{47, 53, -1},	// CH3
-					{48, 52, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -2787,7 +5145,57 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -2801,7 +5209,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -2812,7 +5220,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -2826,7 +5234,32 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -2867,18 +5300,68 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 	{					
 		"GP0__FLYWHEEL_BOOST__SEPARATE__DIRECTION",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, -1},	// CH0
-					{8, -1},	// CH1
-					{9, -1},	// CH2
-					{10, -1},	// CH3
+					{0, 44, -1},	// CH0
+					{1, 45, -1},	// CH1
+					{2, 46, -1},	// CH2
+					{3, 47, -1},	// CH3
+					{4, 48, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+					{5, 49, -1},	// CH0
+					{6, 50, -1},	// CH1
+					{7, 51, -1},	// CH2
+					{8, 52, -1},	// CH3
+					{9, 53, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -2892,13 +5375,113 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{11, 19, -1},	// CH0
-					{12, 20, -1},	// CH1
-					{13, 21, -1},	// CH2
-					{14, 22, -1},	// CH3
-					{15, 23, -1},	// CH4
+					{16, 60, -1},	// CH0
+					{17, 61, -1},	// CH1
+					{18, 62, -1},	// CH2
+					{19, 63, -1},	// CH3
+					{20, 64, -1},	// CH4
+					{21, 65, -1},	// CH5
+					{22, 66, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+					{23, 67, -1},	// CH0
+					{24, 68, -1},	// CH1
+					{25, 69, -1},	// CH2
+					{26, 70, -1},	// CH3
+					{27, 71, -1},	// CH4
+					{28, 72, -1},	// CH5
+					{29, 73, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+					{30, 74, -1},	// CH0
+					{31, 75, -1},	// CH1
+					{32, 76, -1},	// CH2
+					{33, 77, -1},	// CH3
+					{34, 78, -1},	// CH4
+					{35, 79, -1},	// CH5
+					{36, 80, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+					{37, 81, -1},	// CH0
+					{38, 82, -1},	// CH1
+					{39, 83, -1},	// CH2
+					{40, 84, -1},	// CH3
+					{41, 85, -1},	// CH4
+					{42, 86, -1},	// CH5
+					{43, 87, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, -1},	// CH0
+					{89, -1},	// CH1
+					{90, -1},	// CH2
+					{91, -1},	// CH3
+					{92, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -2917,9 +5500,59 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
-						// CH0
+					{93, -1},	// CH0
+					{94, -1},	// CH1
+					{95, -1},	// CH2
+					{96, -1},	// CH3
+					{97, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+					{98, -1},	// CH0
+					{99, -1},	// CH1
+					{100, -1},	// CH2
+					{101, -1},	// CH3
+					{102, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
 						// CH1
 						// CH2
 						// CH3
@@ -2931,7 +5564,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_1,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -2942,63 +5575,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
-					{27, 30, -1},	// CH0
-					{28, 31, -1},	// CH1
-					{29, 32, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Box Fix RGB 4ch		
-				{ // LogicalCh:Physical ch set		
-					{40, -1},	// CH0
-					{41, -1},	// CH1
-					{42, -1},	// CH2
-					{43, -1},	// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
-				{ // LogicalCh:Physical ch set		
-					{44, 52, -1},	// CH0
-					{45, 53, -1},	// CH1
-					{46, 54, -1},	// CH2
-					{47, 55, -1},	// CH3
-					{48, 56, -1},	// CH4
+					{192, -1},	// CH0
+					{193, -1},	// CH1
+					{194, -1},	// CH2
+					{195, -1},	// CH3
+					{196, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -3017,13 +5600,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
-					{49, 57, -1},	// CH0
-					{50, 58, -1},	// CH1
-					{51, 59, -1},	// CH2
-						// CH3
-						// CH4
+					{197, -1},	// CH0
+					{198, -1},	// CH1
+					{199, -1},	// CH2
+					{200, -1},	// CH3
+					{201, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -3031,7 +5614,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -3042,13 +5625,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2 strobe		
 				{ // LogicalCh:Physical ch set		
-					{60, 63, -1},	// CH0
-					{61, 64, -1},	// CH1
-					{62, 65, -1},	// CH2
-						// CH3
-						// CH4
+					{202, -1},	// CH0
+					{203, -1},	// CH1
+					{204, -1},	// CH2
+					{205, -1},	// CH3
+					{206, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -3056,7 +5639,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -3097,18 +5680,68 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 	{					
 		"GP0__FLYWHEEL_BOOST__SEPARATE__SYMMETRY",				
 		{				
-			{ // Block	Box Fix RGB 4ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, -1},	// CH0
-					{8, -1},	// CH1
-					{9, -1},	// CH2
-					{10, -1},	// CH3
+					{0, 48, -1},	// CH0
+					{1, 47, -1},	// CH1
+					{2, 46, -1},	// CH2
+					{3, 45, -1},	// CH3
+					{4, 44, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+					{5, 53, -1},	// CH0
+					{6, 52, -1},	// CH1
+					{7, 51, -1},	// CH2
+					{8, 50, -1},	// CH3
+					{9, 49, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 58, -1},	// CH0
+					{12, 57, -1},	// CH1
+					{13, 56, -1},	// CH2
+					{14, 55, -1},	// CH3
 						// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
 				Bp_4,	// Bp_Pattern	
@@ -3122,13 +5755,113 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
+			{ // Block	wall 2		
 				{ // LogicalCh:Physical ch set		
-					{11, 23, -1},	// CH0
-					{12, 22, -1},	// CH1
-					{13, 21, -1},	// CH2
-					{14, 20, -1},	// CH3
-					{15, 19, -1},	// CH4
+					{16, 66, -1},	// CH0
+					{17, 65, -1},	// CH1
+					{18, 64, -1},	// CH2
+					{19, 63, -1},	// CH3
+					{20, 62, -1},	// CH4
+					{21, 61, -1},	// CH5
+					{22, 60, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+					{23, 73, -1},	// CH0
+					{24, 72, -1},	// CH1
+					{25, 71, -1},	// CH2
+					{26, 70, -1},	// CH3
+					{27, 69, -1},	// CH4
+					{28, 68, -1},	// CH5
+					{29, 67, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+					{30, 80, -1},	// CH0
+					{31, 79, -1},	// CH1
+					{32, 78, -1},	// CH2
+					{33, 77, -1},	// CH3
+					{34, 76, -1},	// CH4
+					{35, 75, -1},	// CH5
+					{36, 74, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+					{37, 87, -1},	// CH0
+					{38, 86, -1},	// CH1
+					{39, 85, -1},	// CH2
+					{40, 84, -1},	// CH3
+					{41, 83, -1},	// CH4
+					{42, 82, -1},	// CH5
+					{43, 81, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, -1},	// CH0
+					{89, -1},	// CH1
+					{90, -1},	// CH2
+					{91, -1},	// CH3
+					{92, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -3147,9 +5880,59 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
-						// CH0
+					{93, -1},	// CH0
+					{94, -1},	// CH1
+					{95, -1},	// CH2
+					{96, -1},	// CH3
+					{97, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+					{98, -1},	// CH0
+					{99, -1},	// CH1
+					{100, -1},	// CH2
+					{101, -1},	// CH3
+					{102, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
 						// CH1
 						// CH2
 						// CH3
@@ -3161,7 +5944,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_1,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -3172,63 +5955,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
-					{27, 32, -1},	// CH0
-					{28, 31, -1},	// CH1
-					{29, 30, -1},	// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Box Fix RGB 4ch		
-				{ // LogicalCh:Physical ch set		
-					{40, -1},	// CH0
-					{41, -1},	// CH1
-					{42, -1},	// CH2
-					{43, -1},	// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_4,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Upper x LR Fix RGB 5ch		
-				{ // LogicalCh:Physical ch set		
-					{44, 56, -1},	// CH0
-					{45, 55, -1},	// CH1
-					{46, 54, -1},	// CH2
-					{47, 53, -1},	// CH3
-					{48, 52, -1},	// CH4
+					{192, -1},	// CH0
+					{193, -1},	// CH1
+					{194, -1},	// CH2
+					{195, -1},	// CH3
+					{196, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -3247,13 +5980,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	Lower x LR Fix RGB 3ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
-					{49, 59, -1},	// CH0
-					{50, 58, -1},	// CH1
-					{51, 57, -1},	// CH2
-						// CH3
-						// CH4
+					{197, -1},	// CH0
+					{198, -1},	// CH1
+					{199, -1},	// CH2
+					{200, -1},	// CH3
+					{201, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -3261,7 +5994,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -3272,13 +6005,13 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable x LR Fix RGB 3ch		
+			{ // Block	ball 2 strobe		
 				{ // LogicalCh:Physical ch set		
-					{60, 65, -1},	// CH0
-					{61, 64, -1},	// CH1
-					{62, 63, -1},	// CH2
-						// CH3
-						// CH4
+					{202, -1},	// CH0
+					{203, -1},	// CH1
+					{204, -1},	// CH2
+					{205, -1},	// CH3
+					{206, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
@@ -3286,137 +6019,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_3,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // END			
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				NULL,		
-				NULL,		
-				false,	// b_PanTilt	
-				NULL,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-		},				
-	},					
-	{					
-		"GP1__SOUND_BOOST",				
-		{				
-			{ // Block	LR Fix RGB 2ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_2,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable Fix RGB 1ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	LR Fix Strobe 2ch		
-				{ // LogicalCh:Physical ch set		
-					{40, 41, 44, 45, 46, 47, 48, 49, 50, 51, -1},	// CH0
-					{42, 43, 52, 53, 54, 55, 56, 57, 58, 59, -1},	// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_2,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable Fix Strobe 1ch		
-				{ // LogicalCh:Physical ch set		
-					{60, 61, 62, 63, 64, 65, -1},	// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -3455,23 +6058,23 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 		},				
 	},					
 	{					
-		"GP1__BEAT_NORMAL",				
+		"GP1__SOUND_NORMAL__SYNC__STRAIGHT",				
 		{				
-			{ // Block	LR Fix RGB 2ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, 8, 11, 12, 13, 14, 15, 16, 17, 18, -1},	// CH0
-					{9, 10, 19, 20, 21, 22, 23, 24, 25, 26, -1},	// CH1
-						// CH2
-						// CH3
-						// CH4
+					{0, 44, 5, 49, -1},	// CH0
+					{1, 45, 6, 50, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 8, 52, -1},	// CH3
+					{4, 48, 9, 53, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_2,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -3482,9 +6085,159 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable Fix RGB 1ch		
+			{ // Block	wall 1 RGB		
 				{ // LogicalCh:Physical ch set		
-					{27, 28, 29, 30, 31, 32, -1},	// CH0
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_4,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 2		
+				{ // LogicalCh:Physical ch set		
+					{16, 60, 23, 67, 30, 74, 37, 81, -1},	// CH0
+					{17, 61, 24, 68, 31, 75, 38, 82, -1},	// CH1
+					{18, 62, 25, 69, 32, 76, 39, 83, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 27, 71, 34, 78, 41, 85, -1},	// CH4
+					{21, 65, 28, 72, 35, 79, 42, 86, -1},	// CH5
+					{22, 66, 29, 73, 36, 80, 43, 87, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, -1},	// CH0
 						// CH1
 						// CH2
 						// CH3
@@ -3507,114 +6260,9 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	LR Fix Strobe 2ch		
+			{ // Block	ball 1		
 				{ // LogicalCh:Physical ch set		
 						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_2,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable Fix Strobe 1ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // END			
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				NULL,		
-				NULL,		
-				false,	// b_PanTilt	
-				NULL,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-		},				
-	},					
-	{					
-		"GP1__FLYWHEEL_NORMAL",				
-		{				
-			{ // Block	LR Fix RGB 2ch		
-				{ // LogicalCh:Physical ch set		
-					{7, 8, 11, 12, 13, 14, 15, 16, 17, 18, -1},	// CH0
-					{9, 10, 19, 20, 21, 22, 23, 24, 25, 26, -1},	// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_RGB,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_2,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable Fix RGB 1ch		
-				{ // LogicalCh:Physical ch set		
-					{27, 28, 29, 30, 31, 32, -1},	// CH0
 						// CH1
 						// CH2
 						// CH3
@@ -3626,7 +6274,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
@@ -3637,7 +6285,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	LR Fix Strobe 2ch		
+			{ // Block	ball 2		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -3648,12 +6296,12 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_Fix_RGB,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_2,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -3662,322 +6310,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	SideTable Fix Strobe 1ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // END			
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				NULL,		
-				NULL,		
-				false,	// b_PanTilt	
-				NULL,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-		},				
-	},					
-	{					
-		"GP1__FLYWHEEL_BOOST__RGB",				
-		{				
-			{ // Block	LR Fix RGB 2ch		
-				{ // LogicalCh:Physical ch set		
-					{7, 8, 11, 12, 13, 14, 15, 16, 17, 18, -1},	// CH0
-					{9, 10, 19, 20, 21, 22, 23, 24, 25, 26, -1},	// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_2,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable Fix RGB 1ch		
-				{ // LogicalCh:Physical ch set		
-					{27, 28, 29, 30, 31, 32, -1},	// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	LR Fix Strobe 2ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_2,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable Fix Strobe 1ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // END			
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				NULL,		
-				NULL,		
-				false,	// b_PanTilt	
-				NULL,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-		},				
-	},					
-	{					
-		"GP1__FLYWHEEL_BOOST__W",				
-		{				
-			{ // Block	LR Fix RGB 2ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_2,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable Fix RGB 1ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	LR Fix Strobe 2ch		
-				{ // LogicalCh:Physical ch set		
-					{40, 41, 44, 45, 46, 47, 48, 49, 50, 51, -1},	// CH0
-					{42, 43, 52, 53, 54, 55, 56, 57, 58, 59, -1},	// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_2,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	SideTable Fix Strobe 1ch		
-				{ // LogicalCh:Physical ch set		
-					{60, 61, 62, 63, 64, 65, -1},	// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Fix_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // END			
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				NULL,		
-				NULL,		
-				false,	// b_PanTilt	
-				NULL,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-		},				
-	},					
-	{					
-		"GP2__SOUND_BOOST",				
-		{				
-			{ // Block	All Fix RGB 1ch		
+			{ // Block	ball 3		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -4002,9 +6335,9 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	All Fix Strobe 1ch		
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
-					{40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, -1},	// CH0
+						// CH0
 						// CH1
 						// CH2
 						// CH3
@@ -4016,7 +6349,57 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -4055,11 +6438,186 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 		},				
 	},					
 	{					
-		"GP2__FLYWHEEL_NORMAL",				
+		"GP1__SOUND_NORMAL__SYNC__TWIST",				
 		{				
-			{ // Block	All Fix RGB 1ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, -1},	// CH0
+					{0, 44, 9, 53, -1},	// CH0
+					{1, 45, 8, 52, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 6, 50, -1},	// CH3
+					{4, 48, 5, 49, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_4,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 2		
+				{ // LogicalCh:Physical ch set		
+					{16, 60, 29, 73, 30, 74, 43, 87, -1},	// CH0
+					{17, 61, 28, 72, 31, 75, 42, 86, -1},	// CH1
+					{18, 62, 27, 71, 32, 76, 41, 85, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 25, 69, 34, 78, 39, 83, -1},	// CH4
+					{21, 65, 24, 68, 35, 79, 38, 82, -1},	// CH5
+					{22, 66, 23, 67, 36, 80, 37, 81, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, -1},	// CH0
 						// CH1
 						// CH2
 						// CH3
@@ -4082,7 +6640,82 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	All Fix Strobe 1ch		
+			{ // Block	ball 1		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -4096,7 +6729,57 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -4135,25 +6818,25 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 		},				
 	},					
 	{					
-		"GP2__FLYWHEEL_BOOST_RGB",				
+		"GP1__FLYWHEEL_NORMAL__SYNC__STRAIGHT",				
 		{				
-			{ // Block	All Fix RGB 1ch		
+			{ // Block	wall 0 RGB		
 				{ // LogicalCh:Physical ch set		
-					{7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, -1},	// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
+					{0, 44, 5, 49, -1},	// CH0
+					{1, 45, 6, 50, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 8, 52, -1},	// CH3
+					{4, 48, 9, 53, -1},	// CH4
 						// CH5
 						// CH6
 					{-1},	
 				},		
-				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_WallWasher,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
 				},		
 				{ // BpInfo_Pan		
 					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
@@ -4162,7 +6845,257 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	All Fix Strobe 1ch		
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_4,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 2		
+				{ // LogicalCh:Physical ch set		
+					{16, 60, 23, 67, 30, 74, 37, 81, -1},	// CH0
+					{17, 61, 24, 68, 31, 75, 38, 82, -1},	// CH1
+					{18, 62, 25, 69, 32, 76, 39, 83, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 27, 71, 34, 78, 41, 85, -1},	// CH4
+					{21, 65, 28, 72, 35, 79, 42, 86, -1},	// CH5
+					{22, 66, 29, 73, 36, 80, 43, 87, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -4176,7 +7109,57 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -4215,9 +7198,284 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 		},				
 	},					
 	{					
-		"GP2__FLYWHEEL_BOOST_W",				
+		"GP1__FLYWHEEL_NORMAL__SYNC__TWIST",				
 		{				
-			{ // Block	All Fix RGB 1ch		
+			{ // Block	wall 0 RGB		
+				{ // LogicalCh:Physical ch set		
+					{0, 44, 9, 53, -1},	// CH0
+					{1, 45, 8, 52, -1},	// CH1
+					{2, 46, 7, 51, -1},	// CH2
+					{3, 47, 6, 50, -1},	// CH3
+					{4, 48, 5, 49, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+					{11, 55, -1},	// CH0
+					{12, 56, -1},	// CH1
+					{13, 57, -1},	// CH2
+					{14, 58, -1},	// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_4,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 2		
+				{ // LogicalCh:Physical ch set		
+					{16, 60, 29, 73, 30, 74, 43, 87, -1},	// CH0
+					{17, 61, 28, 72, 31, 75, 42, 86, -1},	// CH1
+					{18, 62, 27, 71, 32, 76, 41, 85, -1},	// CH2
+					{19, 63, 26, 70, 33, 77, 40, 84, -1},	// CH3
+					{20, 64, 25, 69, 34, 78, 39, 83, -1},	// CH4
+					{21, 65, 24, 68, 35, 79, 38, 82, -1},	// CH5
+					{22, 66, 23, 67, 36, 80, 37, 81, -1},	// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
 				{ // LogicalCh:Physical ch set		
 						// CH0
 						// CH1
@@ -4231,7 +7489,7 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
-				Bp_1,	// Bp_Pattern	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -4242,9 +7500,9 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
 				},		
 			},			
-			{ // Block	All Fix Strobe 1ch		
+			{ // Block	ball 1 strobe		
 				{ // LogicalCh:Physical ch set		
-					{40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, -1},	// CH0
+						// CH0
 						// CH1
 						// CH2
 						// CH3
@@ -4256,7 +7514,412 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 				Weight_PlayMode_Fix_Strobe,		
 				Weight_PlayMode_PanTilt,		
 				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // END			
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				NULL,		
+				NULL,		
+				false,	// b_PanTilt	
+				NULL,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__MOV_LUM_RGB,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+		},				
+	},					
+	{					
+		"GP2__FLYWHEEL_BOOST__SEPARATE",				
+		{				
+			{ // Block	wall 0 RGB		
+				{ // LogicalCh:Physical ch set		
+					{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
 				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 1 RGB		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall center		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_4,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 2		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 3		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 4		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	wall 5		
+				{ // LogicalCh:Physical ch set		
+						// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_WallWasher,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_7,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0		
+				{ // LogicalCh:Physical ch set		
+					{88, -1},	// CH0
+					{89, -1},	// CH1
+					{90, -1},	// CH2
+					{91, -1},	// CH3
+					{92, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1		
+				{ // LogicalCh:Physical ch set		
+					{93, -1},	// CH0
+					{94, -1},	// CH1
+					{95, -1},	// CH2
+					{96, -1},	// CH3
+					{97, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2		
+				{ // LogicalCh:Physical ch set		
+					{98, -1},	// CH0
+					{99, -1},	// CH1
+					{100, -1},	// CH2
+					{101, -1},	// CH3
+					{102, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 3		
+				{ // LogicalCh:Physical ch set		
+					{103, -1},	// CH0
+						// CH1
+						// CH2
+						// CH3
+						// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_RGB,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_1,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_PANEL,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 0 strobe		
+				{ // LogicalCh:Physical ch set		
+					{192, -1},	// CH0
+					{193, -1},	// CH1
+					{194, -1},	// CH2
+					{195, -1},	// CH3
+					{196, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 1 strobe		
+				{ // LogicalCh:Physical ch set		
+					{197, -1},	// CH0
+					{198, -1},	// CH1
+					{199, -1},	// CH2
+					{200, -1},	// CH3
+					{201, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
+				{ // BpInfo_Luminance		
+					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
+				},		
+				{ // BpInfo_Pan		
+					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
+				},		
+				{ // BpInfo_Tilt		
+					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
+				},		
+			},			
+			{ // Block	ball 2 strobe		
+				{ // LogicalCh:Physical ch set		
+					{202, -1},	// CH0
+					{203, -1},	// CH1
+					{204, -1},	// CH2
+					{205, -1},	// CH3
+					{206, -1},	// CH4
+						// CH5
+						// CH6
+					{-1},	
+				},		
+				Weight_PlayMode_Fix_Strobe,		
+				Weight_PlayMode_PanTilt,		
+				false,	// b_PanTilt	
+				Bp_5,	// Bp_Pattern	
 				{ // BpInfo_Luminance		
 					DEVICE_CH_TYPE__FIX_LUM_STROBE,	
 				},		
@@ -4298,460 +7961,11 @@ BLOCK_GROUP BlockGrouping_InTangible[] = {
 						
 const int NUM_GROUPTYPES_INTANGIBLE = sizeof(BlockGrouping_InTangible) / sizeof(BlockGrouping_InTangible[0]);						
 
+
 BLOCK_GROUP BlockGrouping_Tangible[] = {						
 	{					
-		"TANGIBLE_GP0__NOSOUND",				
+		"TANGIBLE_GP__DUMMY",				
 		{				
-			{ // Block	Center moving RGB 7ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_RGB,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Center moving Strobe 7ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // END			
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				NULL,		
-				NULL,		
-				false,	// b_PanTilt	
-				NULL,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-		},				
-	},					
-	{					
-		"TANGIBLE_GP0__SOUND",				
-		{				
-			{ // Block	Center moving RGB 7ch		
-				{ // LogicalCh:Physical ch set		
-					{0, -1},	// CH0
-					{1, -1},	// CH1
-					{2, -1},	// CH2
-					{3, -1},	// CH3
-					{4, -1},	// CH4
-					{5, -1},	// CH5
-					{6, -1},	// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_RGB,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Center moving Strobe 7ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // END			
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				NULL,		
-				NULL,		
-				false,	// b_PanTilt	
-				NULL,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-		},				
-	},					
-	{					
-		"TANGIBLE_GP0__BEAT_NORMAL",				
-		{				
-			{ // Block	Center moving RGB 7ch		
-				{ // LogicalCh:Physical ch set		
-					{0, -1},	// CH0
-					{1, -1},	// CH1
-					{2, -1},	// CH2
-					{3, -1},	// CH3
-					{4, -1},	// CH4
-					{5, -1},	// CH5
-					{6, -1},	// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_RGB,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Center moving Strobe 7ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // END			
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				NULL,		
-				NULL,		
-				false,	// b_PanTilt	
-				NULL,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-		},				
-	},					
-	{					
-		"TANGIBLE_GP0__BEAT_BOOST",				
-		{				
-			{ // Block	Center moving RGB 7ch		
-				{ // LogicalCh:Physical ch set		
-					{0, -1},	// CH0
-					{1, -1},	// CH1
-					{2, -1},	// CH2
-					{3, -1},	// CH3
-					{4, -1},	// CH4
-					{5, -1},	// CH5
-					{6, -1},	// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_RGB,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Center moving Strobe 7ch		
-				{ // LogicalCh:Physical ch set		
-					{33, -1},	// CH0
-					{34, -1},	// CH1
-					{35, -1},	// CH2
-					{36, -1},	// CH3
-					{37, -1},	// CH4
-					{38, -1},	// CH5
-					{39, -1},	// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // END			
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				NULL,		
-				NULL,		
-				false,	// b_PanTilt	
-				NULL,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-		},				
-	},					
-	{					
-		"TANGIBLE_GP0__FLYWHEEL_NORMAL",				
-		{				
-			{ // Block	Center moving RGB 7ch		
-				{ // LogicalCh:Physical ch set		
-					{0, -1},	// CH0
-					{1, -1},	// CH1
-					{2, -1},	// CH2
-					{3, -1},	// CH3
-					{4, -1},	// CH4
-					{5, -1},	// CH5
-					{6, -1},	// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_RGB,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Center moving Strobe 7ch		
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // END			
-				{ // LogicalCh:Physical ch set		
-						// CH0
-						// CH1
-						// CH2
-						// CH3
-						// CH4
-						// CH5
-						// CH6
-					{-1},	
-				},		
-				NULL,		
-				NULL,		
-				false,	// b_PanTilt	
-				NULL,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-		},				
-	},					
-	{					
-		"TANGIBLE_GP0__FLYWHEEL_BOOST",				
-		{				
-			{ // Block	Center moving RGB 7ch		
-				{ // LogicalCh:Physical ch set		
-					{0, -1},	// CH0
-					{1, -1},	// CH1
-					{2, -1},	// CH2
-					{3, -1},	// CH3
-					{4, -1},	// CH4
-					{5, -1},	// CH5
-					{6, -1},	// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_RGB,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_RGB,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
-			{ // Block	Center moving Strobe 7ch		
-				{ // LogicalCh:Physical ch set		
-					{33, -1},	// CH0
-					{34, -1},	// CH1
-					{35, -1},	// CH2
-					{36, -1},	// CH3
-					{37, -1},	// CH4
-					{38, -1},	// CH5
-					{39, -1},	// CH6
-					{-1},	
-				},		
-				Weight_PlayMode_Mov_Strobe,		
-				Weight_PlayMode_PanTilt,		
-				true,	// b_PanTilt	
-				Bp_7,	// Bp_Pattern	
-				{ // BpInfo_Luminance		
-					DEVICE_CH_TYPE__MOV_LUM_STROBE,	
-				},		
-				{ // BpInfo_Pan		
-					DEVICE_CH_TYPE__MOV_ANGLE_PAN,	
-				},		
-				{ // BpInfo_Tilt		
-					DEVICE_CH_TYPE__MOV_ANGLE_TILT,	
-				},		
-			},			
 			{ // END			
 				{ // LogicalCh:Physical ch set		
 						// CH0
@@ -4782,7 +7996,6 @@ BLOCK_GROUP BlockGrouping_Tangible[] = {
 };						
 						
 const int NUM_GROUPTYPES_TANGIBLE = sizeof(BlockGrouping_Tangible) / sizeof(BlockGrouping_Tangible[0]);						
-
 
 /************************************************************************************************************************/
 } // namespace SPACE_LIGHT{

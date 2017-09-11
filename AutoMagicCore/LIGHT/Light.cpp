@@ -1287,12 +1287,17 @@ void LIGHT::Clear_Blackout()
 ******************************/
 void LIGHT::Dice_Blackout()
 {
+	return BLACKOUT__NONE;
+	
+	
+	/*
 	int Weight[NUM_BLACKOUT_TYPES]	= {4, 4, 1};
 	
 	int index = Dice_index(Weight, NUM_BLACKOUT_TYPES);
 	if(index == -1) { ERROR_MSG(); ofExit(); return; }
 	
 	Blackout = BLACKOUT(index);
+	*/
 }
 
 /******************************
