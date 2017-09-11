@@ -129,6 +129,10 @@ void ofApp::draw(){
 	Graph.draw();
 	Graph.unlock();
 	
+	AutoMagicCore->lock();
+	AutoMagicCore->draw_gui();
+	AutoMagicCore->unlock();
+	
 	/********************
 	********************/
 	ofPushStyle();
@@ -184,6 +188,7 @@ void ofApp::audioOut(float *output, int bufferSize, int nChannels)
 	/********************
 	********************/
 	float now_sec = ofGetElapsedTimef();
+	double vol_Raw = 0;
 	
 	/********************
 	input -> output
@@ -196,14 +201,18 @@ void ofApp::audioOut(float *output, int bufferSize, int nChannels)
 		
 		/* */
 		Sound_Filter.x_in(AudioSample.Left[i]);
+		
+		/* */
+		vol_Raw += AudioSample.Left[i] * AudioSample.Left[i];
     }
-
+	vol_Raw = sqrt(vol_Raw / bufferSize);
+	
 	/* 1 output / BufferBlock */
 	if(BootMode == MODE__CHECK_FILTEROUT){
 		fprintf(fp_Filterout, "%f,%f,%f,%f,%f\n", now_sec, Sound_Filter.get_y(SOUND_FILTER::VOL_THROUGH), Sound_Filter.get_y(SOUND_FILTER::VOL_LPF), Sound_Filter.get_y(SOUND_FILTER::VOL_BPF), Sound_Filter.get_y(SOUND_FILTER::VOL_SOUNDSYNC));
 		
 	}else{
-		AutoMagicCore->INT(Graph, now_sec, Sound_Filter.get_y(SOUND_FILTER::VOL_THROUGH), Sound_Filter.get_y(SOUND_FILTER::VOL_LPF), Sound_Filter.get_y(SOUND_FILTER::VOL_BPF), Sound_Filter.get_y(SOUND_FILTER::VOL_SOUNDSYNC));
+		AutoMagicCore->INT(Graph, now_sec, vol_Raw, Sound_Filter.get_y(SOUND_FILTER::VOL_THROUGH), Sound_Filter.get_y(SOUND_FILTER::VOL_LPF), Sound_Filter.get_y(SOUND_FILTER::VOL_BPF), Sound_Filter.get_y(SOUND_FILTER::VOL_SOUNDSYNC));
 	}
 }
 

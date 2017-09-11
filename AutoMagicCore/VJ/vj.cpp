@@ -722,13 +722,14 @@ double VJ::CalLev_from_ShortPattern(PFUNC_VJ_SHORTPATTERN pFunc_sp, int Progress
 
 /******************************
 ******************************/
-void VJ::draw(double Vol_SoundSync)
+void VJ::draw(bool b_SoundOn, double Vol_SoundSync)
 {
 	/********************
 	********************/
 	fprintf_Log(fp_Alpha_fft, "==========\n");
 	fprintf_Vj_Alpha_fft(fp_Alpha_fft, "<time_ms> %d\n", now_ms);
 	
+	fprintf_Vj_Alpha_fft(fp_Alpha_fft, "%d\n", b_SoundOn);
 	fprintf_Vj_Alpha_fft(fp_Alpha_fft, "%f\n", VjDataSet.get__mov_a());
 	fprintf_Vj_Alpha_fft(fp_Alpha_fft, "%d\n", VjDataSet.get__b_mov_Effect_On());
 	fprintf_Vj_Alpha_fft(fp_Alpha_fft, "%f\n", VjDataSet.get__mov_a_0_12());
@@ -745,6 +746,7 @@ void VJ::draw(double Vol_SoundSync)
 	/********************
 	********************/
 	fprintf_Log(fp_test, "%d,", now_ms);
+	fprintf_Log(fp_test, "%d,", b_SoundOn);
 	fprintf_Log(fp_test, "%f,", VjDataSet.get__mov_a());
 	fprintf_Log(fp_test, "%d,", VjDataSet.get__b_mov_Effect_On());
 	fprintf_Log(fp_test, "%f,", VjDataSet.get__mov_a_0_12());
@@ -759,16 +761,32 @@ void VJ::draw(double Vol_SoundSync)
 	/********************
 	********************/
 	string message = "";
-	message +=	ofToString(VjDataSet.get__mov_a())					+ "," + 
-				ofToString(VjDataSet.get__b_mov_Effect_On())		+ "," + 
-				ofToString(VjDataSet.get__mov_a_0_12())				+ "," + 
-				ofToString(VjDataSet.get__b_mov0_Effect_On())		+ "," + 
-				ofToString(VjDataSet.get__mov_a_1_2())				+ "," + 
-				ofToString(VjDataSet.get__a_indicator())			+ "," + 
-				ofToString(VjDataSet.get__a_particle())				+ "," + 
-				ofToString(VjDataSet.get__b_GeneratedImage_on())	+ "," + 
-				ofToString(VjDataSet.get__b_text_on())				+ "," + 
-				ofToString(VjDataSet.get__a_Strobe())				+ "|";
+	
+	message += ofToString(b_SoundOn) + "|";
+	
+	if(b_SoundOn){
+		message +=	ofToString(VjDataSet.get__mov_a())					+ "," + 
+					ofToString(VjDataSet.get__b_mov_Effect_On())		+ "," + 
+					ofToString(VjDataSet.get__mov_a_0_12())				+ "," + 
+					ofToString(VjDataSet.get__b_mov0_Effect_On())		+ "," + 
+					ofToString(VjDataSet.get__mov_a_1_2())				+ "," + 
+					ofToString(VjDataSet.get__a_indicator())			+ "," + 
+					ofToString(VjDataSet.get__a_particle())				+ "," + 
+					ofToString(VjDataSet.get__b_GeneratedImage_on())	+ "," + 
+					ofToString(VjDataSet.get__b_text_on())				+ "," + 
+					ofToString(VjDataSet.get__a_Strobe())				+ "|";
+	}else{
+		message +=	ofToString(0)										+ "," + 
+					ofToString(false)									+ "," + 
+					ofToString(0)										+ "," + 
+					ofToString(false)									+ "," + 
+					ofToString(0)										+ "," + 
+					ofToString(0)										+ "," + 
+					ofToString(0)										+ "," + 
+					ofToString(false)									+ "," + 
+					ofToString(false)									+ "," + 
+					ofToString(0)										+ "|";
+	}
 				
 	const int N_SPECTRUM = 256;
 	for(int i = 0; i < N_SPECTRUM; i++){

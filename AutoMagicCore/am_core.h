@@ -58,6 +58,8 @@ size : checked on Mac
 
 /************************************************************
 ************************************************************/
+#include "ofxGui.h"
+
 #include "../Graph.h"
 #include "am_common.h"
 
@@ -69,7 +71,7 @@ enum COLORPATTERNS;
 
 /**************************************************
 **************************************************/
-class AUTOMAGIC_CORE{
+class AUTOMAGIC_CORE : public ofThread{
 private:
 	/****************************************
 	enum
@@ -83,9 +85,21 @@ private:
 		NUM_TYPE_OF_VOL_DATA,
 	};
 	
+	enum STATE_SOUND_ONOFF{
+		STATE_SOUND_OFF,
+		STATE_SOUND_ON,
+	};
+	
 	/****************************************
 	param
 	****************************************/
+	/********************
+	********************/
+	ofxPanel gui;
+	
+	ofxToggle b_Enable_SoundOnOff_Vj;
+	ofxToggle b_Enable_SoundOnOff_Light;
+	
 	/********************
 	********************/
 	FILE *fp_debug_state;
@@ -106,6 +120,8 @@ private:
 	int c_INT;
 	
 	STATE__BEAT_DETECT State_IsLock;
+	
+	STATE_SOUND_ONOFF State_SoundOnOff;
 	
 	/********************
 	********************/
@@ -143,6 +159,7 @@ private:
 	int Is_Flywheel_Lock(long long& VolLow_Peak);
 	int Is_Flywheel_UnLock(long long& VolLow_Peak, int *Counter_Beats);
 	int Is_VolLpf_HighEnough();
+	void StateChart_Sound_OnOff(double Vol_Raw);
 	
 	static int compare_int(const void *a, const void *b);
 	
@@ -160,8 +177,10 @@ public:
 	void exit();
 	void setup(int mode);
 	void test();
-	void INT(GRAPH& Graph, double now_sec, double Vol_Thtough, double Vol_Lpf, double Vol_Bpf, double Vol_SoundSync);
+	void INT(GRAPH& Graph, double now_sec, double Vol_Raw, double Vol_Thtough, double Vol_Lpf, double Vol_Bpf, double Vol_SoundSync);
 	
 	void set__b_Fileout(bool flag);
+	
+	void draw_gui();
 };
 

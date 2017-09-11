@@ -41,6 +41,7 @@ AUTOMAGIC_CORE::AUTOMAGIC_CORE()
 , b_StopColorAutoChange(false)
 , c_INT(0)
 , debug_b_BeatDetect(0)
+, State_SoundOnOff(STATE_SOUND_OFF)
 {
 	/********************
 	********************/
@@ -124,6 +125,14 @@ void AUTOMAGIC_CORE::setup(int mode)
 {
 	/********************
 	********************/
+	gui.setup();
+	gui.setPosition(230, 10);
+	
+	gui.add(b_Enable_SoundOnOff_Vj.setup("SoundOnOff_Vj", true));
+	gui.add(b_Enable_SoundOnOff_Light.setup("SoundOnOff_Light", true));
+	
+	/********************
+	********************/
 	setBootmode(mode);
 
 	/********************
@@ -204,11 +213,15 @@ void AUTOMAGIC_CORE::SetColorTheme(enum COLORPATTERNS ColorPattern, int Operatio
 
 /******************************
 ******************************/
-void AUTOMAGIC_CORE::INT(GRAPH& Graph, double now_sec, double Vol_Thtough, double Vol_Lpf, double Vol_Bpf, double Vol_SoundSync)
+void AUTOMAGIC_CORE::INT(GRAPH& Graph, double now_sec, double Vol_Raw, double Vol_Thtough, double Vol_Lpf, double Vol_Bpf, double Vol_SoundSync)
 {
 	/********************
 	********************/
 	now_ms = (int)(now_sec * 1000);
+	
+	/********************
+	********************/
+	StateChart_Sound_OnOff(Vol_Raw);
 	
 	/********************
 	********************/
@@ -226,29 +239,87 @@ void AUTOMAGIC_CORE::INT(GRAPH& Graph, double now_sec, double Vol_Thtough, doubl
 ******************************/
 void AUTOMAGIC_CORE::update(GRAPH& Graph, double Vol_Thtough, double Vol_Lpf, double Vol_Bpf, double Vol_SoundSync)
 {
-	/*
+	/********************
 	moving ave.
 	After this function, VolLevel[] are boosted with "Boost_AGC" and then averaged.
-	*/
+	********************/
 	MovingAve_vol(Vol_Thtough, Vol_Lpf, Vol_Bpf, Vol_SoundSync);
 	
-	/* */
+	/********************
+	********************/
 	Set_vol_max_assumed();
 	
-	/* StateChart */
+	/********************
+	StateChart
+	********************/
 	MusicAnalysis(Graph);
 
-	/* */
+	/********************
+	********************/
 	light->update();
 	vj->update();
 }
 
 /******************************
 ******************************/
+void AUTOMAGIC_CORE::StateChart_Sound_OnOff(double Vol_Raw)
+{
+	/********************
+	actual range:0 - 0.1
+	1% is 0.001
+	********************/
+	const double VOLTHRESH__OFF_TO_ON = 0.005;
+	const double VOLTHRESH__ON_TO_OFF_HIGH	= 0.0045;
+	const double VOLTHRESH__ON_TO_OFF_LOW	= 0.0005;
+	
+	const double TANTHRESH__ON_TO_OFF = -0.005;
+	
+	static double Last_Vol_Raw = 0;
+	static int counter = 0;
+	
+	/********************
+	********************/
+	switch(State_SoundOnOff){
+		case STATE_SOUND_OFF:
+			if(VOLTHRESH__OFF_TO_ON < Vol_Raw){
+				State_SoundOnOff = STATE_SOUND_ON;
+			}
+			
+			break;
+			
+		case STATE_SOUND_ON:
+			if(	( Vol_Raw < VOLTHRESH__ON_TO_OFF_LOW ) ||														// u”½‰ž—Ç‚­‚·‚é‚½‚ß‚ÌŽdŠ|‚¯v‚Åˆø‚Á‚©‚©‚ç‚È‚©‚Á‚½ê‡‚Ì–Ô. ‹}s‚Ètan‚ªŽæ‚ê‚È‚¢‰Â”\«‚ª‚ ‚é‚Ì‚Å.
+				( (Vol_Raw < VOLTHRESH__ON_TO_OFF_HIGH) && (Vol_Raw - Last_Vol_Raw < TANTHRESH__ON_TO_OFF) )	// ”½‰ž—Ç‚­‚·‚é‚½‚ß‚ÌŽdŠ|‚¯. Vol‰º‚è‚«‚Á‚Ä‚È‚¢‚ªA\•ª’á‚­Atan‚ª‹}s.
+				 ){
+				State_SoundOnOff = STATE_SOUND_OFF;
+			}
+			
+			break;
+	}
+	
+	Last_Vol_Raw = Vol_Raw;
+}
+
+/******************************
+******************************/
+void AUTOMAGIC_CORE::draw_gui()
+{
+	gui.draw();
+}
+
+/******************************
+******************************/
 void AUTOMAGIC_CORE::draw()
 {
-	light->draw();
-	vj->draw((double)VolLevel[DATA_VOL_SOUNDSYNC]/ReverseBoostAGC_fft);
+	lock();
+	
+	if(!State_SoundOnOff && b_Enable_SoundOnOff_Vj)		vj->draw(false, (double)VolLevel[DATA_VOL_SOUNDSYNC]/ReverseBoostAGC_fft);
+	else												vj->draw(true, (double)VolLevel[DATA_VOL_SOUNDSYNC]/ReverseBoostAGC_fft);
+	
+	if(!State_SoundOnOff && b_Enable_SoundOnOff_Light)	light->draw(false);
+	else												light->draw(true);
+	
+	unlock();
 }
 
 /******************************
